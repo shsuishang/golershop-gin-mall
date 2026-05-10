@@ -16,13 +16,17 @@
 
 ---
 
-### golershop-gin（本仓库）：HTTP 由 Gin 承载
+### golershop-gin（本仓库）：HTTP 由 Gin 承载，业务层沿用 GoFrame 生态
 
+本目录 **golershop-gin** 与上游 **golershop（纯 GoFrame `ghttp`）** 的差异与约定如下，便于对照文档与排障：
 
-| 能力 | 说明                                                                                                                                                                                                                                                                                                                                                      |
-|------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **HTTP 入口** | 使用 **Gin**（`internal/router`、`internal/controller`），路由与绑定在 Gin 侧完成。                                                                                                                                                                                                                                                                                     |
-| **业务与数据** | **DAO / Logic / Service / Model** 等与 golershop 对齐，使用  `g.Redis()`、`gdb`、`gcfg` 等。                                                                                                                                                                                                                                                                       |
+| 能力 | 说明 |
+|------|------|
+| **HTTP 入口** | 使用 **Gin**（`internal/router`、`internal/controller`），路由与绑定在 Gin 侧完成。 |
+| **业务与数据** | **DAO / Logic / Service / Model** 等与 golershop 对齐，使用  `g.Redis()`、`gdb`、`gcfg` 等。  
+| **配置** | 默认读取项目根下 **`configs/config.yaml`**；启动前由 **`internal/pkg/gfpreboot`** 挂载 `g.Cfg()` 并 blank import **MySQL/Redis** 官方 contrib 驱动。工作目录非模块根时可设环境变量 **`GOLERSHOP_GFCFG`**（指向含 `config.yaml` 的目录或该文件绝对路径）。 |
+| **数据库 `link`** | GoFrame 要求格式 **`mysql:user:pass@tcp(host:port)/dbname?...`**（须带 **`mysql:`** 类型前缀），与部分历史「仅 user:pass@tcp…」写法不同。 |
+| **中间件** | `logic/shopsuite/middleware` 仍为 **`*ghttp.Request`** 实现（GoFrame 工程直接使用）；本 Gin 工程在 **`internal/middleware/shopsuite.go`** 用 **`gin.HandlerFunc`** 按行对齐 **Ctx / CheckLogin / CORS / NeverDoneCtx / AfterOutput** 等行为，并通过 **`BizCtx.WithBizContext`** 将 **`model.Context`** 与标准库 **`*http.Request`** 写入 **`context`**，与 golershop `cmd` 中全局链顺序一致。依赖 ghttp 链式响应的 **`MiddlewareHandlerResponse` / `MiddlewareErrorHandler`** 未挂到 Gin（由 `binder` 写 JSON）。 |
 
 **运行**：在模块根执行 `go run .` 或 `go build .`；IDE 若将可执行文件输出到临时目录，请将运行「工作目录」设为仓库根，或配置 **`GOLERSHOP_GFCFG`**。
 

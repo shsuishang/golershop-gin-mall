@@ -1,0 +1,226 @@
+server:
+  address: ":8001"
+  openapiPath: "/api.json"
+  swaggerPath: "/swagger"
+
+secure:
+  publicKey: ""
+  privateKey: ""
+
+  ignore: #配置白名单路径
+    - "/swagger/"
+    - "/api.json"
+    - "/front/sys/config/listTranslateLang"
+    - "/front/sys/config/guide"
+    - "/front/sys/config/getQrcode"
+    - "/front/account/user/info"
+    - "/front/sys/captcha/index"
+    - "/front/sys/config/info"
+    - "/front/sys/config/publicKey"
+    - "/front/sys/upload/index"
+    - "/front/sys/captcha/mobile"
+    - "/front/account/login/login"
+    - "/front/account/login/register"
+    - "/front/account/login/protocol"
+    - "/front/account/login/setNewPassword"
+    - "/front/account/wechat/checkAppLogin"
+    - "/front/account/wechat/jsCode2Session"
+    - "/front/account/wechat/getOpenIdByCode"
+    - "/front/account/wechat/callbackMp"
+    - "/front/sys/district/tree"
+    - "/front/pay/callback/wechatNotify"
+    - "/front/pay/callback/wechatRefundNotify"
+    - "/front/pay/callback/alipayNotify"
+    - "/front/pay/callback/alipayReturn"
+    - "/front/pay/callback/returnUrl"
+
+    - "/front/sys/plus/typeList"
+    - "/front/sys/plus/privilegeList"
+    - "/front/sys/plus/privilegeDetail"
+
+    - "/front/sys/page/getMobilePage"
+    - "/front/sys/page/getPcPage"
+    - "/front/sys/page/pcLayout"
+    - "/front/pt/product/listCategory"
+    - "/front/pt/product/treeCategory"
+    - "/front/pt/product/list"
+    - "/front/pt/product/listItem"
+    - "/front/pt/product/detail"
+    - "/front/pt/product/getSearchFilter"
+    - "/front/pt/product/brand"
+
+    - "/front/shop/userContrastItem/list"
+
+    - "/front/shop/mobile/getSearchInfo"
+    - "/front/marketing/activityBase/listVoucher"
+    - "/front/marketing/activityBase/listGroupbooking"
+
+    - "/front/cms/articleBase/listCategory"
+    - "/front/cms/articleBase/list"
+    - "/front/cms/articleBase/get"
+
+    - "/front/o2o/chain/list"
+
+    - "/front/pt/product/unitList"
+    - "/front/shop/store/list"
+    - "/front/shop/store/getFilterOpt"
+    - "/front/shop/store/getStoreCategoryTree"
+
+    - "/front/hall/purchase/lists"
+
+    - "/front/sns/Story/lists"
+    - "/front/sns/Story/getCategory"
+    - "/front/sns/Story/getStory"
+    - "/front/sns/Story/listComment"
+    - "/front/sns/Story/getRelData"
+    - "/front/sns/Story/story"
+    - "/front/sns/Story/space"
+    - "/front/sns/Comment/listUserCommentStory"
+
+    - "/front/edu/course/getCategoryList"
+    - "/front/edu/course/getBuyCourseList"
+    - "/front/edu/userLecturer/list"
+    - "/front/edu/course/list"
+    - "/front/edu/learnTarget/getLearnTime"
+
+    - "/front/account/user/getCompanyByUserId"
+    - "/front/sys/config/getConfigs"
+    - "/front/account/user/getIndustryTree"
+
+# 系统配置（与 golershop manifest/config 中 shopSuite 段对齐；布尔项使用 YAML bool 以便 config.Load 解析）
+shopSuite:
+  version: "v1.0.0"
+  appDebug: true
+  dbDebug: true
+  uploadDir: "./resource/public/uploads"
+  urlBase: "http://127.0.0.1:8000"
+  urlH5: "http://localhost:8080/#"
+  urlPc: "https://demo.modulithshop.cn"
+  cacheEnable: true
+  cacheNamespace: "gs:1001:"
+  cacheSeparator: ":"
+
+licence:
+  key: "="
+
+
+# 数据库连接配置
+database:
+  logger:
+    path: "logs/sql"
+    level: "all"
+    stdout: true
+    ctxKeys: [ "RequestId" ]
+
+  default:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  sys:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  account:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  pay:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  store:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  pt:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  order:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  shop:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  admin:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  cms:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  marketing:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  trade:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  invoicing:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  sns:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  o2o:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+    
+  edu:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+
+  hall:
+    link: "mysql:dbname:dbpwd@tcp(127.0.0.1:3306)/dev_shop_suite?loc=Local&parseTime=true"
+    debug: true
+ 
+# Redis 配置示例
+redis:
+  # 单实例配置示例1
+  default:
+    address: 127.0.0.1:6379
+    db: 10
+    pass: dev_pwd_123
+
+    minIdle: "4"   # 允许闲置的最小连接数
+    maxIdle: "8"  # 允许闲置的最大连接数(0表示不限制)
+    maxActive: "16" # 最大连接数量限制(0表示不限制)
+    idleTimeout: "30m"  # 连接最大空闲时间，使用时间字符串例如30s/1m/1d
+
+  # 单实例配置示例2
+  cache:
+    address: 127.0.0.1:6379
+    db: 10
+    pass: dev_pwd_123
+
+    minIdle: "4"   # 允许闲置的最小连接数
+    maxIdle: "8"  # 允许闲置的最大连接数(0表示不限制)
+    maxActive: "16" # 最大连接数量限制(0表示不限制)
+    idleTimeout: "30m"  # 连接最大空闲时间，使用时间字符串例如30s/1m/1d
+
+logger:
+  level: "all"
+  stdout: true
+
+jwt:
+  # 认证信息Http请求头
+  tokenHeader: "Authorization"
+
+  # 认证信息Http请求头
+  tokenPrefix: "Bearer "
+
+  # token secret
+  tokenSecret: "43286a86708820e38c333cdd4c496351"
+
+  # 过期时间 单位minutes
+  tokenTttl: 3600
+
+  # 刷新时间 单位minutes
+  tokenRefreshTtl: 20160
+
